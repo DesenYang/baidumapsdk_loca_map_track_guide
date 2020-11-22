@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+
+    defaultConfig {
+        applicationId "com.example.map.testapp"
+        minSdkVersion 14
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'adnroid'
+            storeFile file('./debug.keystore')
+            storePassword 'android'
+        }
+        debug {
+            keyAlias 'key0'
+            keyPassword 'munds123'
+            storeFile file('./untitled.keystore')
+            storePassword 'munds123'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+        release.setRoot('build-types/release')
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.1'
+
+
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        google()
+    }
+}
